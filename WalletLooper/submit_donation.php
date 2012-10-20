@@ -34,18 +34,16 @@
 	$continue_shopping_url = "http://www.ashanet.org/thank_you.php?"; //Arbitrary amounts of URL queries can be appended to this URL
 	
 	//------Structure for a recurring donation
-	//$subscription = array(
-	//	"type" => ""
-	//	"period" => ""
-	//	"start_date" => ""
-	//	"no_charge_after" => ""
-	//	"payment_times" => ""
-	//	"maximum_charge" => ""
-	//	"recurrent_item_name" => ""
-	//	"recurrent_item_description" => ""
-	//	"recurrent_unit_price" => ""
-	//	"recurrent_quantity" => ""
-	//);
+	$subscription = array(
+		"type" => "google",
+		"period" => $_POST["subscription"],
+		"payment_times" => $_POST["numRecur"],
+		"maximum_charge" => $unit_price,
+		"recurrent_item_name" => $item_name,
+		"recurrent_item_description" => $item_description,
+		"recurrent_unit_price" => $unit_price,
+		"recurrent_quantity" => "1"
+	);
 	
 	//-----Unused POST arguments
 	//$requiredCardname = $_POST['requiredCardname'];
@@ -69,32 +67,29 @@
 				$xml_data->Push('item');
 					$xml_data->Element('item-name', $item_name);
 					$xml_data->Element('item-description', $item_description);
-					$xml_data->Element('unit-price', $unit_price, array('currency' => $currency));
 					$xml_data->Element('quantity', "1");
 					$xml_data->Push('digital-content');
 						$xml_data->Element('description', "In your heart");
 					$xml_data->Pop('digital-content');
 
 					// Potential for use in recurrence.
-					if ($subscription) {
-						$xml_data->Element('unit-price', 0, array('currency' => $currency));
+					if ($_POST["recurringCheck"]) {
+						$xml_data->Element('unit-price', "0", array('currency' => $currency));
 						$xml_data->Push('subscription', array('type' => $subscription["type"],
 										'period' => $subscription["period"],
 										'start-date' => $subscription["start_date"],
 										'no-charge-after' => $subscription["no_charge_after"]));
 							$xml_data->Push('payments');
-								$xml_data->Push('subscription-payment', array('times' => $subscription["payment_times"));
-									$xml_data->Element('maximum-charge', $subscription["maximum_charge", array('currency' => $currency));
+								$xml_data->Push('subscription-payment', array('times' => $subscription["payment_times"]));
+									$xml_data->Element('maximum-charge', $subscription["maximum_charge"], array('currency' => $currency));
 								$xml_data->Pop('subscription-payment');
 							$xml_data->Pop('payments');
-							if ($subscription->type == 'google') {
-								$xml_data->Push('recurrent-item');
-									$xml_data->Element('item-name', $subscription["recurrent_item_name"]);
-									$xml_data->Element('item-description', $subscription["recurrent_item_description"]);
-									$xml_data->Element('unit-price', $subscription["recurrent_unit_price"], array('currency' => $currency));
-									$xml_data->Element('quantity', $subscription["recurrent_quantity"]);
-								$xml_data->Pop('recurrent-item'); 
-							}
+							$xml_data->Push('recurrent-item');
+								$xml_data->Element('item-name', $subscription["recurrent_item_name"]);
+								$xml_data->Element('item-description', $subscription["recurrent_item_description"]);
+								$xml_data->Element('unit-price', $subscription["recurrent_unit_price"], array('currency' => $currency));
+								$xml_data->Element('quantity', $subscription["recurrent_quantity"]);
+							$xml_data->Pop('recurrent-item');
 						$xml_data->pop('subscription');                
 					} else {
 						$xml_data->Element('unit-price', $unit_price, array('currency' => $currency));

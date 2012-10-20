@@ -40,7 +40,14 @@
                     alert("Please enter a valid donation amount.");
                     return false;
                 }
-                    
+                
+                validateThis = parseInt(document.forms[0]["numRecur"].value);
+                if (validateThis < 2)
+                {
+                    alert("Please enter a recurrence greater than one.");
+                    return false;
+                }
+                
                 return true;
                 
 			}
@@ -118,6 +125,13 @@
                 <option value='QUARTERLY'>Quarterly</option>
                 <option value='YEARLY'>Annually</option>	
 			</select>
+            
+            <br />How many times would you like to have the payment recur?<br />
+            <input name='numRecur'
+                maxlength="3"
+                size="5"
+                value="" />
+                
 
 			<br />Comments
 			<br /><textarea name="comments" wrap="hard" rows="3" cols="25"></textarea>
