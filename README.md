@@ -1,12 +1,12 @@
 AshaWallet
 ==========
 
-Team: O(n) && 0xFF
+Team: O(n) && 0xFF 
 10/20/2012
 
 Google Wallet integration - Asha for Education
 
-* The files are contained in the following folders:
+The files are contained in the following folders:
 * /Super Simple
 	* Contains a single HTML file with all the functionality a donate button needs.
 	* Nothing on the server's side.
