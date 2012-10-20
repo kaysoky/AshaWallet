@@ -1,11 +1,11 @@
-<!-- 
-	Team: O(n) && 0xFF
-	24 Hours of Good - Seattle Hackathon
-	10/20/2012
--->
-
 <?php
 /*****************************************************************************/
+	/*
+		Team: O(n) && 0xFF
+		24 Hours of Good - Seattle Hackathon
+		10/20/2012 
+	*/
+	
 	//Fetch arguments needed for Google Wallet
 	//Also perform validation
 	

@@ -1,16 +1,14 @@
-<!-- 
-	Team: O(n) && 0xFF
-	24 Hours of Good - Seattle Hackathon
-	10/20/2012
-	
-	Google Notification and Data Collection.
-
-	This is a .php file that notifies google that the transaction
-	has taken place and that we acknowledge it. It also collects
-	the data to keep in database. Have this file be the checkout
-	api's callback url and give it the Notification Serial Number.
--->
 <?php 
+	// Team: O(n) && 0xFF
+	// 24 Hours of Good - Seattle Hackathon
+	// 10/20/2012
+	
+	// Google Notification and Data Collection.
+
+	// This is a .php file that notifies google that the transaction
+	// has taken place and that we acknowledge it. It also collects
+	// the data to keep in database. Have this file be the checkout
+	// api's callback url and give it the Notification Serial Number.
 	#The id and key given by google for the merchant account
 	$merchant_id  = "930430079376986";
 	$merchant_key = "z8D0h_z5GtVGTBNMORVlVQ";

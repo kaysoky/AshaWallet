@@ -125,7 +125,7 @@
 
             <br />Would you like to make this a recurring donation?
             <input name='recurringCheck' type="checkbox" />
-            
+                
             <br />How frequently would you like to donate this amount?<br />
             <select name='subscription' title='Please select'>
     			<option value=''>---Choose One---</option>
