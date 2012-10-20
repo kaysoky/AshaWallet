@@ -1,6 +1,7 @@
 <?php
 /*****************************************************************************/
 	//Fetch arguments needed for Google Wallet
+	//Also perform validation
 	
 	//These values should match that of the Google Wallet Merchant account
 	$merchant_id = "930430079376986";
@@ -11,11 +12,24 @@
 	
 	//The item name will be the title of the project (or Asha by default)
 	$project = $_POST['project'];
-	$item_name = (strlen($project) > 0 && preg_match(/\w+/, $project) ? $project : "Asha for Education");
+	$item_name = (strlen($project) > 0 && preg_match("/\w+/", $project) ? $project : "Asha for Education");
 	
-	//Needs <input> tags in donation_page.php
-	$item_description = "Charity :D";
-	$unit_price = "10";
+	//The item description will be the description of the project
+	$description = $_POST['description'];
+	$item_description = (strlen($description) > 0 && preg_match("/\w+/", $description) ? $description : "A charitable cause");
+	
+	//The unit price will the the integer amount donated
+	$donation = $_POST['donation'];
+	$subscription = $_POST['subscription'];
+	if (strlen($donation) <= 0 || preg_match("/.*\D+.*/", $donation)) {
+		die("Invalid amount of donation");
+	}
+	$unit_price = $donation;
+	
+	//Not sure if this is important
+	//$donor_address = "";
+	
+	//To be generated on server side
 	$merchant_private_data = "1234"; //Unique donor ID goes here
 	$continue_shopping_url = "http://www.ashanet.org/thank_you.php?"; //Arbitrary amounts of URL queries can be appended to this URL
 	
@@ -42,6 +56,7 @@
 	//$join_list = $_POST['join_list'];
 	//$Checkout = $_POST['Checkout'];
 	
+	
 /*****************************************************************************/
 	//Write an XML blob to send to Google Wallet
 	//Refer to https://developers.google.com/checkout/developer/Google_Checkout_XML_API_Tag_Reference
@@ -62,6 +77,7 @@
 
 					// Potential for use in recurrence.
 					if ($subscription) {
+						$xml_data->Element('unit-price', 0, array('currency' => $currency));
 						$xml_data->Push('subscription', array('type' => $subscription["type"],
 										'period' => $subscription["period"],
 										'start-date' => $subscription["start_date"],
@@ -80,6 +96,8 @@
 								$xml_data->Pop('recurrent-item'); 
 							}
 						$xml_data->pop('subscription');                
+					} else {
+						$xml_data->Element('unit-price', $unit_price, array('currency' => $currency));
 					}
 				$xml_data->Pop('item');
 			$xml_data->Pop('items');

@@ -1,0 +1,1 @@
+INSERT INTO donation (id, person_id, project_id, chapter_id, currency_id, debit_type, email, billing_cardname,   billing_address, billing_address2, billing_city, billing_state, billing_zip, billing_country, billing_amount, billing_cardtype, billing_cardnum, billing_expires, billing_cvv2, phone, date_sent, join_list, comments, notes, last_modified, date_added) VALUES ()
