@@ -32,6 +32,7 @@
 	}
 	$unit_price = $donation;
 	
+	//This validates that there is not inconsistent information for making recurring donations
 	if ((!$_POST["recurringCheck"] && ($_POST["subscription"] || $_POST["numRecur"])) 
 			|| ($_POST["recurringCheck"] && !($_POST["subscription"] && $_POST["numRecur"]))) {
 		die("Invalid recurring donation");
