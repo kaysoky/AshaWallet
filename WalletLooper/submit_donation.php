@@ -1,3 +1,9 @@
+<!-- 
+	Team: O(n) && 0xFF
+	24 Hours of Good - Seattle Hackathon
+	10/20/2012
+-->
+
 <?php
 /*****************************************************************************/
 	//Fetch arguments needed for Google Wallet
@@ -26,12 +32,28 @@
 	}
 	$unit_price = $donation;
 	
+	if ((!$_POST["recurringCheck"] && ($_POST["subscription"] || $_POST["numRecur"])) 
+			|| ($_POST["recurringCheck"] && !($_POST["subscription"] && $_POST["numRecur"]))) {
+		die("Invalid recurring donation");
+	}
+	
 	//Not sure if this is important
 	//$donor_address = "";
 	
 	//To be generated on server side
 	$merchant_private_data = "1234"; //Unique donor ID goes here
 	$continue_shopping_url = "http://www.ashanet.org/thank_you.php?"; //Arbitrary amounts of URL queries can be appended to this URL
+	/*
+		Appending example: 
+			http://www.ashanet.org/thank_you.php?donation_id=1234&person_id=Bob&zip_code=98765
+		
+		How to parse a return URL:
+			$url = $_SERVER['PATH_INFO'];
+			$query = parse_str(parse_url($url,PHP_URL_QUERY));
+			//$query["donation_id"] == "1234"
+			//$query["person_id"] == "Bob"
+			//$query["zip_code"] == "98765"
+	*/
 	
 	//------Structure for a recurring donation
 	$subscription = array(
@@ -45,14 +67,8 @@
 		"recurrent_quantity" => "1"
 	);
 	
-	//-----Unused POST arguments
-	//$requiredCardname = $_POST['requiredCardname'];
-	//$requiredEmail = $_POST['requiredEmail'];
-	//$display_chapter = $_POST['display_chapter'];
-	//$chapter = $_POST['chapter'];
-	//$requiredCurrency = $_POST['requiredCurrency'];
-	//$join_list = $_POST['join_list'];
-	//$Checkout = $_POST['Checkout'];
+	//Unused POST arguments:
+	//fname, lname, emailaddr, chapter
 	
 	
 /*****************************************************************************/
@@ -121,6 +137,7 @@
 	list($status, $error) = $GRequest->SendServer2ServerCart($xml_data->GetXML());
 	
 	//If something goes wrong, then the page won't redirect and will hit this error section:
+	//You may want to comment out parts of this section before deployment, because the error messages are very specific
 	echo "An error had ocurred: <br />HTTP Status: " . $status. ":";
 	echo "<br />Error message:<br />";
 	echo $error;

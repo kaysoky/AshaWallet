@@ -1,6 +1,18 @@
+<!-- 
+	Team: O(n) && 0xFF
+	24 Hours of Good - Seattle Hackathon
+	10/20/2012
+	
+	Main donation page
+	
+	The basic form for users to fill out for donations.
+-->
+
 <html>
 	<head>
 		<TITLE>Asha for Education: Bringing hope through education</TITLE>
+		
+		<!-- function to validate forms -->
 		<script type="text/javascript">
 			function validateForm()
 			{
@@ -113,7 +125,7 @@
 
             <br />Would you like to make this a recurring donation?
             <input name='recurringCheck' type="checkbox" />
-                
+            
             <br />How frequently would you like to donate this amount?<br />
             <select name='subscription' title='Please select'>
     			<option value=''>---Choose One---</option>
@@ -135,14 +147,14 @@
 
 			<br />Comments
 			<br /><textarea name="comments" wrap="hard" rows="3" cols="25"></textarea>
-			<br /><br />Note: Paypal deducts around 3% of the amount listed above towards transaction fees.
-			Asha for Education has a zero overhead policy on donations, i.e., 100% of all donations get spent on educational projects in India. Further, all of our administrative expenses are kept to a bare minimum, thanks to support from our volunteers. In addition to volunteers' contributions, our administrative expenses (including the 3% transaction fees mentioned above) get covered by our investment income and sales of merchandise. 
 			<br /><br />
 			
 			<input type="checkbox" name="join_list" value="1" checked="true"/>
 			Check here to find out more about joining an Asha chapter near you<br />
 			
-			<?php					
+			<?php
+				//Get the Merchant specific Google Checkout button:
+				
 				//Init the URL's
 				$server_type = "sandbox";
 				$server_url = "https://checkout.google.com/";

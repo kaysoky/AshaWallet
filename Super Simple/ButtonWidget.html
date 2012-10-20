@@ -1,6 +1,18 @@
+<!-- 
+	Team: O(n) && 0xFF
+	24 Hours of Good - Seattle Hackathon
+	10/20/2012
+	
+	Google's donate button (with slight modifications)
+	
+	This is a html file containing a button that when pressed
+	takes you to the donation page for google wallet.
+-->
+
 <!DOCTYPE html>
 <html>
 <body>
+<!-- validates amount -->
 <script type="text/javascript"> 
 function validateAmount(amount){
 	if(amount.value.match( /^[0-9]+(\.([0-9]+))?$/)){
@@ -13,8 +25,14 @@ function validateAmount(amount){
 }
 </script>
 
+<!-- 
+	Form: most values hidden but there are a few that are user 
+	provided. 
+-->
 <form action="https://sandbox.google.com/checkout/cws/v2/Donations/930430079376986/checkoutForm" id="BB_BuyButtonForm" method="post" name="BB_BuyButtonForm" onSubmit="return validateAmount(this.item_price_1)" target="_top">
-    <label>Project Name: <input name="item_name_1" type="text" value="type project name"/></label>
+    <!-- Project donating to -->
+	<label>Project Name: <input name="item_name_1" type="text" value="type project name"/></label>
+	<!-- Place Asha dontation key at this item_description -->
     <input name="item_description_1" type="hidden" value="DONATION_KEY"/>
     <input name="item_quantity_1" type="hidden" value="1"/>
     <input name="item_currency_1" type="hidden" value="USD"/>
