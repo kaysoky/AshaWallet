@@ -1,0 +1,61 @@
+<html>
+<head>
+<TITLE>Asha for Education: Bringing hope through education</TITLE>
+</head>
+
+<body>
+    <p>
+    By Google Wallet
+    Note: Donations made through this form are tax-deductible (only) in the US under Section 501(c)(3) of the IRS Code. If you reside outside of the US and want to make a tax-deductible donation, please use <a href="https://www.ashanet.org/index.php?page=chapters">this link</a>
+    </p>
+        
+<form name=smform method="post" action="/donate-new/paypal_process.php">
+    Name  <br>
+    <input name="requiredCardname" value="" maxlength=40 title="Please enter your name exactly as it is on your credit card ">
+    
+    <br>Email<br>
+    <input name=requiredEmail maxlength=50 size=30 value="" title="Please enter your email address"><br>
+    
+    <input type=hidden name=display_chapter value=1>
+    
+    <!-- sql = SELECT id, name FROM chapter WHERE active=1 ORDER BY name -->
+    Chapter<br>
+    <select class=small-text name=chapter title='Please select'>
+        <option value=''>---Choose One---</option>
+        <option value="1">Atlantis</option>
+        <option value="2">Seatown</option>
+        <option value="3">Wyoming</option>
+        
+
+    <input type=hidden name=display_project value=1>
+    <!-- sql = SELECT id, name FROM project WHERE 1 ORDER BY name -->
+    
+    <br>Project<br>
+    <select class=small-text name=project title='Please select'>
+        <option value=''>---Choose One---</option>
+        <option value="1">#firstworldproblems</option>
+        <option value="2">#fifthworldproblemz</option>
+        <option value="3">#gymtanlaundry</option>
+        
+    <input type=hidden name=invoiceno value="/donate-new/paypal_donate.php">		
+
+	<input type=hidden name=requiredCurrency value=1>
+
+	<input type=hidden name=display_comments value=1>
+    <br>Comments<br><textarea name="comments" wrap="hard" rows="3" cols="25"></textarea><br><br>		
+	Note: Paypal deducts around 3% of the amount listed above towards transaction fees.
+	Asha for Education has a zero overhead policy on donations, i.e., 100% of all donations get spent on educational projects in India. Further, all of our administrative expenses are kept to a bare minimum, thanks to support from our volunteers. In addition to volunteers' contributions, our administrative expenses (including the 3% transaction fees mentioned above) get covered by our investment income and sales of merchandise. <br/><br />
+    
+    <input type=hidden name=display_questions value=1>
+    
+    <input type=checkbox name=join_list value=1 checked >
+    Check here to find out more about joining an Asha chapter near you<br>
+
+    <input type=hidden name=questions_file_verification value=/home/ashanet/www/donate-new/questions-verification.php><input type=hidden name=questions_file_confirmation value=/home/ashanet/www/donate-new/questions-confirmation.php><input type=hidden name=form_page value=/donate-new/form-v2.php><input type=hidden name=confirmation_page value=/donate-new/confirmation-v2.php><input type=hidden name=form_type value=0>		
+    
+    <input style="background-color:#060; font-size:25px; color:#fff;" type="submit" name="submit" value="Submit">
+</form>
+</body>
+</html>
+
+
